@@ -52,7 +52,8 @@ def sortByKeyword(folderpath, keyword, newName=''):
 def main():
     folderpath = input("Enter the path of the folder you want to clean: ")
     '''test one extension'''
-    sortOneExtension(folderpath, "txt","textfiles")
+    # sortOneExtension(folderpath, "txt","textfiles")
+    # sortOneExtension(folderpath, "txt")
 
 if __name__=="__main__":
     main()
