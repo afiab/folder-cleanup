@@ -15,9 +15,15 @@ def sortAllExtensions(folderpath):
 # function: put specific files into folders by specific file extension
 def sortOneExtension(folderpath, extension, name=''):
     '''
-    loop through the folderpath's contents
-        move all the files for that extension into the folder
-        print a message everytime smth is moved
+    Move all files of a certain extension into a new subfolder
+
+    Parameters:
+        folderpath (str): Path of the folder to search through
+        extension (str): The extension to filter out, examples: txt, pdf, py
+        name (str): The name of the new subfolder, defaults to the extension being filtered
+    
+    Return:
+        None
     '''
     if name=='': # if name is empty
         name = extension # extension is used as default name
@@ -25,7 +31,7 @@ def sortOneExtension(folderpath, extension, name=''):
     if not os.path.exists(newLocation): # if the folder doesnt exist alr
         os.makedirs(newLocation) # make the folder
     contents = os.listdir(folderpath) # list of folder contents
-    for item in contents: # loop through all the files
+    for item in contents: # loop through all the contents of the folder
         itemPath = os.path.join(folderpath,item) # current path of the item
         if os.path.isfile(itemPath): # if this is a file
             fileExt = item.split('.')[-1] # get the extension
