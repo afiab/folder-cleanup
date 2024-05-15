@@ -16,6 +16,7 @@ def sortAllExtensions(folderpath):
 def sortOneExtension(folderpath, extension, name=''):
     '''
     Move all files of a certain extension into a new subfolder
+    If no files are moved, and the subfolder did not previously exist, the subfolder is deleted
 
     Parameters:
         folderpath (str): Path of the folder to search through
@@ -25,11 +26,18 @@ def sortOneExtension(folderpath, extension, name=''):
     Return:
         None
     '''
+    # making the subfolder
     if name=='': # if name is empty
         name = extension # extension is used as default name
     newLocation = os.path.join(folderpath,name) # location of new folder
-    if not os.path.exists(newLocation): # if the folder doesnt exist alr
+    exists = os.path.exists(newLocation) # directory was present before
+    if exists: # if the folder exists alr
+        print(f"{name} exists at {newLocation}")
+    else: # if the folder doesnt exist alr
         os.makedirs(newLocation) # make the folder
+        print(f"{name} has been created at {newLocation}")
+    # go through current folder contents and move them
+    moved = False
     contents = os.listdir(folderpath) # list of folder contents
     for item in contents: # loop through all the contents of the folder
         itemPath = os.path.join(folderpath,item) # current path of the item
@@ -37,7 +45,12 @@ def sortOneExtension(folderpath, extension, name=''):
             fileExt = item.split('.')[-1] # get the extension
             if fileExt == extension: # if this is a file we want to filter
                 shutil.move(itemPath, os.path.join(newLocation, item)) # move the file 
-                print(f"{item} has been moved to {newLocation}") # print statmenent to update changes
+                moved = True # a file has been moved into the subfolder
+                print(f"    {item} -> {name}") # print statmenent to update changes
+    # check that stuff has been moved
+    if not moved and not exists:
+        os.rmdir(newLocation) # remove empty directory
+        print(f"{name} has been removed at {newLocation} because no files were moved")
 
 # function: put files into one folder based on certain keyword in name
 def sortByKeyword(folderpath, keyword, newName=''):
