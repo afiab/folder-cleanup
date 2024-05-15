@@ -5,12 +5,17 @@ import shutil
 # function: put all files into folders by file extension
 def sortAllExtensions(folderpath):
     '''
-    put all the folder's extensions into a set
-    loop through the set of extensions
-        sortOneExtension(folderpath, extension)
-        print a message saying when smth gets moved
+    Sort all files in the folder into subfolders based on their file extensions
+
+    Parameters:
+        folderpath (str): Path of the folder to search through
+
+    Return:
+        None
     '''
-    pass
+    extensions = {item.split('.')[-1] for item in os.listdir(folderpath) if os.path.isfile(os.path.join(folderpath,item))} # set of extensions in the folder
+    for extension in extensions: #loop through all the extensions
+        sortOneExtension(folderpath, extension) # sort extensions into subfolders
 
 # function: put specific files into folders by specific file extension
 def sortOneExtension(folderpath, extension, name=''):
@@ -67,6 +72,7 @@ def main():
     '''test one extension'''
     # sortOneExtension(folderpath, "txt","textfiles")
     # sortOneExtension(folderpath, "txt")
+    # sortAllExtensions(folderpath)
 
 if __name__=="__main__":
     main()
