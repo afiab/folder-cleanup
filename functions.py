@@ -2,6 +2,8 @@
 import os
 import shutil
 
+tab = "    "
+
 # function: put all files into folders by file extension
 def sortAllExtensions(folderpath):
     '''
@@ -51,9 +53,8 @@ def sortOneExtension(folderpath, extension, subfolder=''):
             if fileExt == extension: # if this is a file we want to filter
                 shutil.move(itemPath, os.path.join(newLocation, item)) # move the file 
                 moved = True # a file has been moved into the subfolder
-                print(f"    {item} -> {subfolder}") # print statmenent to update changes
-    # check that stuff has been moved
-    if not moved and not exists:
+                print(f"{tab}{item} -> {subfolder}") # print statmenent to update changes
+    if not moved and not exists: # check that stuff has been moved
         os.rmdir(newLocation) # remove empty directory
         print(f"{subfolder} has been removed at {newLocation} because no files were moved")
 
@@ -91,9 +92,8 @@ def sortByKeyword(folderpath, keyword, subfolder=''):
             if keyword in fileName: # if this is a file we want to filter
                 shutil.move(itemPath, os.path.join(newLocation, item)) # move the file 
                 moved = True # a file has been moved into the subfolder
-                print(f"    {item} -> {subfolder}") # print statmenent to update changes
-    # check that stuff has been moved
-    if not moved and not exists:
+                print(f"{tab}{item} -> {subfolder}") # print statmenent to update changes
+    if not moved and not exists: # check that stuff has been moved
         os.rmdir(newLocation) # remove empty directory
         print(f"{subfolder} has been removed at {newLocation} because no files were moved")
 
