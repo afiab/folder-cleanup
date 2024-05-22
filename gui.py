@@ -6,6 +6,18 @@ import os
 from functions import sortAllExtensions, sortByKeyword, sortOneExtension
 
 def sort_files():
+    '''
+    Determine how the user wants to sort files so that the right function can be called
+    and then calls that function
+    Option 1: sort by extension, then determines one specific extension or all
+    Option 2: sort by keyword
+
+    Parameters:
+        None
+
+    Return:
+        None
+    '''
     folderpath = entry_path.get()  # get folder path from entry widget
     # folder path exists
     if not os.path.exists(folderpath): # folderpath does not exist
@@ -31,11 +43,20 @@ def sort_files():
 
 # function to get parameters for one extension sort
 def sort_one_extension(folderpath):
+    '''
+    Function for the scenario where a user wants to sort by one extension
+    Main purpose is to gather the necessary parameters to call the sortOneExtension function
+
+    Parameters:
+        folderpath (str): Path of the folder to search through
+
+    Return:
+        None
+    '''
     extension = simpledialog.askstring("File Extension", "Enter the file extension to sort:")
     if extension:
         new_folder_name = simpledialog.askstring("New Folder Name", "Enter the name for the new folder:")
-        if new_folder_name:
-            sortOneExtension(folderpath, extension, new_folder_name)
+        sortOneExtension(folderpath, extension, new_folder_name)
 
 # make window
 root = tk.Tk()
