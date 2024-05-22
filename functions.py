@@ -96,16 +96,3 @@ def sortByKeyword(folderpath, keyword, subfolder=''):
     if not moved and not exists: # check that stuff has been moved
         os.rmdir(newLocation) # remove empty directory
         print(f"{subfolder} has been removed at {newLocation} because no files were moved")
-
-def main():
-    folderpath = input("Enter the path of the folder you want to clean: ")
-    '''test one extension'''
-    # sortOneExtension(folderpath, "txt","textfiles")
-    # sortOneExtension(folderpath, "txt")
-    '''test all extensions'''
-    # sortAllExtensions(folderpath)
-    '''test sort by specific word'''
-    # sortByKeyword(folderpath,"docx")
-
-if __name__=="__main__":
-    main()
