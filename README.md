@@ -9,7 +9,7 @@ Please note: I tested this on a Windows device, so I have no idea if it'll work 
 ### Why did I make this?
 My downloads folder was looking really bad, but I did not want to manually go through each file. I made this application to sort the files for me and make it easier for me to manage my files. I did not just want to write the scripts though, and so I decided to make a GUI for them so that it's easier to understand.
 
-### How it works
+### How to use it
 As long as functions.py and gui.py are in the same location, you can just run gui.py with python to get started.
 
 In my case, I have the files on my desktop, and I right-click on _gui.py_ and choose _Open with Python 3.xx_
@@ -33,3 +33,6 @@ You choose to _Sort by keyword_, then type the keyword, then the new subfolder n
 - If a folder is created, but no files are moved into the folder, then the folder is automatically removed. However, if the folder existed prior to the folder search, and no files are moved, the folder will not be deleted.
 - If no name is provided for the new subfolder when organizing one extension or keyword, the subfolder's name defaults to the extension or keyword being separated.
 - The additional pop-up windows automatically close when the operation is complete.
+
+### How did I make this?
+I used the os and shutil libraries for the file management, and tkinter for the GUI. All of these are python libraries
