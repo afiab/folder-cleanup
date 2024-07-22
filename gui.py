@@ -1,72 +1,51 @@
 import tkinter as tk
-from tkinter import messagebox
-from tkinter import simpledialog
-from tkinter import *
-import os
-from functions import sortAllExtensions, sortByKeyword, sortOneExtension
+from tkinter import filedialog, simpledialog, messagebox
+from functions import sortAllExtensions, sortOneExtension, sortByKeyword
 
 def sort_files():
-    '''
-    Determine how the user wants to sort files so that the right function can be called
-    and then calls that function
-    Option 1: sort by extension, then determines one specific extension or all
-    Option 2: sort by keyword
-
-    Parameters:
-        None
-
-    Return:
-        None
-    '''
-    folderpath = entry_path.get()  # get folder path from entry widget
-    # folder path exists
-    if not os.path.exists(folderpath): # folderpath does not exist
-        messagebox.showerror("Error", "Folder path does not exist.")
+    folderpath = entry_path.get()
+    if not folderpath:
+        messagebox.showerror("Error", "No folder selected!")
         return
-    choice = var.get() # choose how to sort
+    choice = var.get()
     if choice == 1:  # by extension
         sort_window = tk.Toplevel(root)
         sort_window.title("Sort by Extension")
-        label = tk.Label(sort_window, text="Do you want to sort all files or one extension?")
-        label.pack()
-        # sort all the files button
+        # sort all files button
         all_files_button = tk.Button(sort_window, text="All Files", command=lambda: sortAllExtensions(folderpath))
-        all_files_button.pack(side=BOTTOM,anchor=CENTER)
+        all_files_button.pack(side=tk.BOTTOM, anchor=tk.CENTER)
         # sort only one file button
         one_extension_button = tk.Button(sort_window, text="One Extension", command=lambda: sort_one_extension(folderpath))
-        one_extension_button.pack(side=BOTTOM,anchor=CENTER)
+        one_extension_button.pack(side=tk.BOTTOM, anchor=tk.CENTER)
     elif choice == 2:  # by keyword
         keyword = simpledialog.askstring("Keyword", "Enter the keyword to filter filenames by:")
         if keyword:
             new_subfolder_name = simpledialog.askstring("New Subfolder Name", "Enter the name for the new subfolder:")
             sortByKeyword(folderpath, keyword, new_subfolder_name)
 
-# function to get parameters for one extension sort
 def sort_one_extension(folderpath):
-    '''
-    Function for the scenario where a user wants to sort by one extension
-    Main purpose is to gather the necessary parameters to call the sortOneExtension function
-
-    Parameters:
-        folderpath (str): Path of the folder to search through
-
-    Return:
-        None
-    '''
     extension = simpledialog.askstring("File Extension", "Enter the file extension to sort:")
     if extension:
         new_folder_name = simpledialog.askstring("New Folder Name", "Enter the name for the new folder:")
         sortOneExtension(folderpath, extension, new_folder_name)
+
+def select_folder():
+    folder_selected = filedialog.askdirectory()
+    if folder_selected:
+        entry_path.delete(0, tk.END)
+        entry_path.insert(0, folder_selected)
 
 # make window
 root = tk.Tk()
 root.title("File Sorter")
 
 # label + entry for file path
-label_path = tk.Label(root, text="Enter folder path:")
+label_path = tk.Label(root, text="Select folder path:")
 label_path.pack()
-entry_path = tk.Entry(root)
+entry_path = tk.Entry(root, width=50)
 entry_path.pack()
+button_browse = tk.Button(root, text="Browse", command=select_folder)
+button_browse.pack()
 
 # radio buttons for sorting choice
 var = tk.IntVar()
@@ -81,5 +60,3 @@ button_sort = tk.Button(root, text="Sort Files", command=sort_files)
 button_sort.pack()
 
 root.mainloop()
-
-
