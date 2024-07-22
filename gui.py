@@ -156,14 +156,17 @@ def clear_frame(frame):
 # make window
 root = tk.Tk()
 root.title("File Sorter")
+root.geometry('500x250')
 
 # label + entry for file path
-label_path = tk.Label(root, text="Select folder path:")
-label_path.pack()
-entry_path = tk.Entry(root, width=50)
-entry_path.pack()
-button_browse = tk.Button(root, text="Browse", command=select_folder)
-button_browse.pack()
+choosefolder_frame = tk.Label(root)
+choosefolder_frame.pack()
+label_path = tk.Label(choosefolder_frame, text="Select folder path:")
+label_path.pack(side=tk.LEFT, anchor=tk.W)
+entry_path = tk.Entry(choosefolder_frame, width=50)
+entry_path.pack(side=tk.LEFT, anchor=tk.W)
+button_browse = tk.Button(choosefolder_frame, text="Browse", command=select_folder)
+button_browse.pack(side=tk.RIGHT, anchor=tk.E)
 
 # radio buttons for sorting choice
 var = tk.IntVar()
