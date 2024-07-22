@@ -4,10 +4,15 @@ from functions import sortAllExtensions, sortOneExtension, sortByKeyword
 import sys
 
 class RedirectText(object):
-    def __init__(self, text_widget):
+    def __init__(self, text_widget, container):
         self.output = text_widget
+        self.container = container
+        self.is_visible = False
 
     def write(self, string):
+        if not self.is_visible:
+            self.container.pack(fill=tk.BOTH, expand=True)
+            self.is_visible = True
         self.output.insert(tk.END, string)
         self.output.see(tk.END)  # Scroll to the end
 
@@ -89,16 +94,17 @@ button_sort.pack()
 options_frame = tk.Frame(root)
 options_frame.pack(fill=tk.BOTH, expand=True)
 
-# text widget for log output
+# frame for log output
 log_frame = tk.Frame(root)
-log_frame.pack(fill=tk.BOTH, expand=True)
+
+# text widget for log output
 scrollbar = tk.Scrollbar(log_frame)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-log_text = tk.Text(log_frame, wrap=tk.WORD, yscrollcommand=scrollbar.set, height=10, width=50)  # Adjust height and width
+log_text = tk.Text(log_frame, wrap=tk.WORD, yscrollcommand=scrollbar.set, height=10, width=40)  # Adjust height and width
 log_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 scrollbar.config(command=log_text.yview)
 
 # redirect stdout
-sys.stdout = RedirectText(log_text)
+sys.stdout = RedirectText(log_text, log_frame)
 
 root.mainloop()
