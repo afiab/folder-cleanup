@@ -75,14 +75,21 @@ def show_sort_keyword_options():
         None
     '''
     clear_frame(options_frame)
-    keyword_label = tk.Label(options_frame, text="Enter Keyword:")
-    keyword_label.pack(side=tk.TOP, anchor=tk.CENTER)
-    keyword_entry = tk.Entry(options_frame)
-    keyword_entry.pack(side=tk.TOP, anchor=tk.CENTER)
-    subfolder_label = tk.Label(options_frame, text="New Subfolder Name:")
-    subfolder_label.pack(side=tk.TOP, anchor=tk.CENTER)
-    subfolder_entry = tk.Entry(options_frame)
-    subfolder_entry.pack(side=tk.TOP, anchor=tk.CENTER)
+
+    keyword_frame = tk.Label(options_frame)
+    keyword_frame.pack()
+    keyword_label = tk.Label(keyword_frame, text="Enter Keyword:")
+    keyword_label.pack(side=tk.LEFT, anchor=tk.W)
+    keyword_entry = tk.Entry(keyword_frame)
+    keyword_entry.pack(side=tk.RIGHT, anchor=tk.E)
+
+    subfolder_frame = tk.Label(options_frame)
+    subfolder_frame.pack()
+    subfolder_label = tk.Label(subfolder_frame, text="New Subfolder Name:")
+    subfolder_label.pack(side=tk.LEFT, anchor=tk.W)
+    subfolder_entry = tk.Entry(subfolder_frame)
+    subfolder_entry.pack(side=tk.RIGHT, anchor=tk.E)
+
     sort_button = tk.Button(options_frame, text="Sort", command=lambda: sortByKeyword(entry_path.get(), keyword_entry.get(), subfolder_entry.get()))
     sort_button.pack(side=tk.TOP, anchor=tk.CENTER)
 
@@ -97,16 +104,22 @@ def sort_one_extension(folderpath):
     Return:
         None
     '''
-    # new below
     clear_frame(options_frame)
-    ext_label = tk.Label(options_frame, text="Enter the file extension to sort:")
-    ext_label.pack(side=tk.TOP, anchor=tk.CENTER)
-    ext_entry = tk.Entry(options_frame)
-    ext_entry.pack(side=tk.TOP, anchor=tk.CENTER)
-    subfolder_label = tk.Label(options_frame, text="New Subfolder Name:")
-    subfolder_label.pack(side=tk.TOP, anchor=tk.CENTER)
-    subfolder_entry = tk.Entry(options_frame)
-    subfolder_entry.pack(side=tk.TOP, anchor=tk.CENTER)
+
+    ext_frame = tk.Label(options_frame)
+    ext_frame.pack()
+    ext_label = tk.Label(ext_frame, text="Enter the file extension to sort:")
+    ext_label.pack(side=tk.LEFT, anchor=tk.W)
+    ext_entry = tk.Entry(ext_frame)
+    ext_entry.pack(side=tk.RIGHT, anchor=tk.E)
+
+    subfolder_frame = tk.Label(options_frame)
+    subfolder_frame.pack()
+    subfolder_label = tk.Label(subfolder_frame, text="New Subfolder Name:")
+    subfolder_label.pack(side=tk.LEFT, anchor=tk.W)
+    subfolder_entry = tk.Entry(subfolder_frame)
+    subfolder_entry.pack(side=tk.RIGHT, anchor=tk.E)
+
     sort_button = tk.Button(options_frame, text="Sort", command=lambda: sortOneExtension(entry_path.get(), ext_entry.get(), subfolder_entry.get()))
     sort_button.pack(side=tk.TOP, anchor=tk.CENTER)
 
