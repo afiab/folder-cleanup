@@ -99,6 +99,10 @@ options_frame.pack(fill=tk.BOTH, expand=True)
 # frame for log output
 log_frame = tk.Frame(root)
 
+# label logging area
+log_label = tk.Label(log_frame, text="Change Log:")
+log_label.pack()
+
 # text widget for log output
 scrollbar = tk.Scrollbar(log_frame)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
