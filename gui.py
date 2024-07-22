@@ -59,10 +59,12 @@ def show_sort_extension_options():
         None
     '''
     clear_frame(options_frame)
-    all_files_button = tk.Button(options_frame, text="Sort All Extensions", command=lambda: sortAllExtensions(entry_path.get()))
-    all_files_button.pack(side=tk.TOP, anchor=tk.CENTER)
-    one_extension_button = tk.Button(options_frame, text="Sort One Extension", command=lambda: sort_one_extension(entry_path.get()))
-    one_extension_button.pack(side=tk.TOP, anchor=tk.CENTER)
+    button_frame = tk.Label(options_frame)
+    button_frame.pack()
+    all_files_button = tk.Button(button_frame, text="Sort All Extensions", command=lambda: sortAllExtensions(entry_path.get()))
+    all_files_button.pack(side=tk.LEFT, anchor=tk.W)
+    one_extension_button = tk.Button(button_frame, text="Sort One Extension", command=lambda: sort_one_extension(entry_path.get()))
+    one_extension_button.pack(side=tk.RIGHT, anchor=tk.E)
 
 def show_sort_keyword_options():
     '''
