@@ -109,11 +109,6 @@ def sort_one_extension(folderpath):
     subfolder_entry.pack(side=tk.TOP, anchor=tk.CENTER)
     sort_button = tk.Button(options_frame, text="Sort", command=lambda: sortOneExtension(entry_path.get(), ext_entry.get(), subfolder_entry.get()))
     sort_button.pack(side=tk.TOP, anchor=tk.CENTER)
-    # old below
-    # extension = simpledialog.askstring("File Extension", "Enter the file extension to sort:")
-    # if extension:
-    #     new_folder_name = simpledialog.askstring("New Folder Name", "Enter the name for the new folder:")
-    #     sortOneExtension(folderpath, extension, new_folder_name)
 
 def select_folder():
     '''
