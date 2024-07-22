@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog, simpledialog, messagebox
+from tkinter import filedialog, messagebox
 from functions import sortAllExtensions, sortOneExtension, sortByKeyword
 import sys
 
