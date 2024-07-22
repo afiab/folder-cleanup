@@ -13,7 +13,9 @@ class RedirectText(object):
         if not self.is_visible:
             self.container.pack(fill=tk.BOTH, expand=True)
             self.is_visible = True
+        self.output.config(state=tk.NORMAL)  # Enable the text widget to insert text
         self.output.insert(tk.END, string)
+        self.output.config(state=tk.DISABLED)  # Disable the text widget to make it read-only
         self.output.see(tk.END)  # Scroll to the end
 
     def flush(self):
@@ -100,7 +102,7 @@ log_frame = tk.Frame(root)
 # text widget for log output
 scrollbar = tk.Scrollbar(log_frame)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-log_text = tk.Text(log_frame, wrap=tk.WORD, yscrollcommand=scrollbar.set, height=10, width=40)  # Adjust height and width
+log_text = tk.Text(log_frame, wrap=tk.WORD, yscrollcommand=scrollbar.set, height=10, width=40, state=tk.DISABLED)  # Adjust height and width
 log_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 scrollbar.config(command=log_text.yview)
 
