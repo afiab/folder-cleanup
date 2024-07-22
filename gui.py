@@ -9,19 +9,29 @@ def sort_files():
         return
     choice = var.get()
     if choice == 1:  # by extension
-        sort_window = tk.Toplevel(root)
-        sort_window.title("Sort by Extension")
-        # sort all files button
-        all_files_button = tk.Button(sort_window, text="All Files", command=lambda: sortAllExtensions(folderpath))
-        all_files_button.pack(side=tk.BOTTOM, anchor=tk.CENTER)
-        # sort only one file button
-        one_extension_button = tk.Button(sort_window, text="One Extension", command=lambda: sort_one_extension(folderpath))
-        one_extension_button.pack(side=tk.BOTTOM, anchor=tk.CENTER)
+        show_sort_extension_options()
     elif choice == 2:  # by keyword
-        keyword = simpledialog.askstring("Keyword", "Enter the keyword to filter filenames by:")
-        if keyword:
-            new_subfolder_name = simpledialog.askstring("New Subfolder Name", "Enter the name for the new subfolder:")
-            sortByKeyword(folderpath, keyword, new_subfolder_name)
+        show_sort_keyword_options()
+
+def show_sort_extension_options():
+    clear_frame(options_frame)
+    all_files_button = tk.Button(options_frame, text="Sort All Extensions", command=lambda: sortAllExtensions(entry_path.get()))
+    all_files_button.pack(side=tk.TOP, anchor=tk.CENTER)
+    one_extension_button = tk.Button(options_frame, text="Sort One Extension", command=lambda: sort_one_extension(entry_path.get()))
+    one_extension_button.pack(side=tk.TOP, anchor=tk.CENTER)
+
+def show_sort_keyword_options():
+    clear_frame(options_frame)
+    keyword_label = tk.Label(options_frame, text="Enter Keyword:")
+    keyword_label.pack(side=tk.TOP, anchor=tk.CENTER)
+    keyword_entry = tk.Entry(options_frame)
+    keyword_entry.pack(side=tk.TOP, anchor=tk.CENTER)
+    subfolder_label = tk.Label(options_frame, text="New Subfolder Name:")
+    subfolder_label.pack(side=tk.TOP, anchor=tk.CENTER)
+    subfolder_entry = tk.Entry(options_frame)
+    subfolder_entry.pack(side=tk.TOP, anchor=tk.CENTER)
+    sort_button = tk.Button(options_frame, text="Sort", command=lambda: sortByKeyword(entry_path.get(), keyword_entry.get(), subfolder_entry.get()))
+    sort_button.pack(side=tk.TOP, anchor=tk.CENTER)
 
 def sort_one_extension(folderpath):
     extension = simpledialog.askstring("File Extension", "Enter the file extension to sort:")
@@ -34,6 +44,10 @@ def select_folder():
     if folder_selected:
         entry_path.delete(0, tk.END)
         entry_path.insert(0, folder_selected)
+
+def clear_frame(frame):
+    for widget in frame.winfo_children():
+        widget.destroy()
 
 # make window
 root = tk.Tk()
@@ -56,7 +70,11 @@ radio_keyword = tk.Radiobutton(root, text="Sort by keyword", variable=var, value
 radio_keyword.pack()
 
 # button to start sorting
-button_sort = tk.Button(root, text="Sort Files", command=sort_files)
+button_sort = tk.Button(root, text="Next", command=sort_files)
 button_sort.pack()
+
+# frame for additional options
+options_frame = tk.Frame(root)
+options_frame.pack(fill=tk.BOTH, expand=True)
 
 root.mainloop()
